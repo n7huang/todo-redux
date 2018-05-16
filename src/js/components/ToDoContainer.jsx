@@ -52,7 +52,7 @@ export default class ToDoContainer extends React.Component {
       })
     }
   }
-
+  
   // main change: => instead of bind
   render() {
     console.log(this.state.todos);
