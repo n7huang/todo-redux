@@ -1,9 +1,17 @@
-import { ADD_TODO, EDIT_TODO, REMOVE_TODO, TOGGLE_TODO } from "../actions/actions"
+import uuid from 'uuid';
+
+import { ADD_TODO, EDIT_TODO, REMOVE_TODO, TOGGLE_TODO } from "../actions/actionTypes"
+
+const initialState = {
+	todos: []
+}
 
 export default function todoReducer(state = initialState, action) {
 	let index = -1;
+
 	switch (action.type) {
 		case ADD_TODO:
+			console.log("reducer");
 			return Object.assign({}, state, 
 			{
 				todos: [
@@ -26,7 +34,7 @@ export default function todoReducer(state = initialState, action) {
 						state.todos
 							.slice(0, index)
 							.concat([{
-                ...todos[index],
+                ...state.todos[index],
                 text: action.text
               }])
 							.concat(state.todos.slice(index + 1))

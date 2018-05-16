@@ -4,13 +4,6 @@ import ToDoItem from "./ToDoItem.jsx";
 
 export default class ToDoList extends React.Component {
 
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
- //      editing: null,
- //    };
-	// }
-
 	state = {
 		editing: null
 	}
@@ -24,7 +17,7 @@ export default class ToDoList extends React.Component {
 	}
 
 	handleAdd = (e) => {
-    this.props.addToDo("<Click To Edit>");
+    	this.props.addToDo("<Click To Edit>");
   }
 
   render() {

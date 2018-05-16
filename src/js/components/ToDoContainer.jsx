@@ -1,72 +1,51 @@
 import React from "react";
-import uuid from 'uuid';
+import { bindActionCreators } from 'redux'
+import { connect } from "react-redux"
 
 import Header from "./Header";
 import Title from "./Title";
 import ToDoList from "./ToDoList.jsx";
+import * as Actions from "../actions/actions"
 
-export default class ToDoContainer extends React.Component {
+class ToDoContainer extends React.Component {
 
   state = { // if state does not rely on props, can just define like this
     todos: []
   }
 
-  addToDo = (text) => { // arrow functions! ES6
-    const item = { // items are now objects: {text, id}
-      text,
-      id: uuid.v4()
-    };
-
-    this.setState({todos: this.state.todos.concat([item])});
-  }
-
-  removeToDo = (todoId) => {
-    const {todos} = this.state;
-
-    const index = todos.findIndex(todo => todo.id === todoId);
-
-    if (index > -1) {
-      this.setState({
-        todos:  todos.slice(0, index).concat(todos.slice(index + 1))
-      })
-    }
-  }
-
-  editToDo = (text, todoId) => {
-    // this.setState({todos: this.state.todos.map((element, index, arr) => {
-    //   return index === i && val !== "" ? val : element;
-    // })});
-
-    const {todos} = this.state;
-
-    const index = todos.findIndex(todo => todo.id === todoId);
-
-    if (index > -1) {
-      this.setState({
-        todos:  todos.slice(0, index)
-                .concat([{
-                  ...todos[index],
-                  text
-                }])
-                .concat(todos.slice(index + 1))
-      })
-    }
-  }
-  
   // main change: => instead of bind
   render() {
-    console.log(this.state.todos);
+    const {actions, todos} = this.props;
+
     return (
       <div>
         <div>Total: {this.state.todos.length}</div>
         <Header title={"To-Do List"} />
         <h3>To-Do</h3>
         <ToDoList 
-          todos={this.state.todos} 
-          addToDo={this.addToDo}
-          removeToDo={this.removeToDo}
-          editToDo={this.editToDo} />
+          todos={todos} 
+          addToDo={actions.addToDo}
+          removeToDo={actions.removeToDo}
+          editToDo={actions.editToDo} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    todos: state.todos
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(Actions, dispatch),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ToDoContainer)
+

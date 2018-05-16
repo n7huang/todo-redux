@@ -1,18 +1,15 @@
-// action types
-export const ADD_TODO = 'ADD_TODO'
-export const EDIT_TODO = 'EDIT_TODO'
-export const REMOVE_TODO = 'REMOVE_TODO'
-export const TOGGLE_TODO = 'TOGGLE_TODO'
+import { ADD_TODO, EDIT_TODO, REMOVE_TODO, TOGGLE_TODO } from "./actionTypes"
 
 // action creators
-export function addTodo(text) {
+export const addToDo = text => {
+	console.log(ADD_TODO)
 	return {
 		type: ADD_TODO,
 		text
 	}
 }
 
-export function editTodo(text, todoId) {
+export const editToDo = (text, todoId) => {
 	return {
 		type: EDIT_TODO,
 		text,
@@ -20,14 +17,14 @@ export function editTodo(text, todoId) {
 	}
 }
 
-export function removeTodo(todoId) {
+export const removeToDo = todoId => {
 	return {
 		type: REMOVE_TODO,
 		todoId
 	}
 }
 
-export function toggleTodo(todoId) {
+export const toggleToDo = todoId => {
 	return {
 		type: TOGGLE_TODO,
 		todoId
