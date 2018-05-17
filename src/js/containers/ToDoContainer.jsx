@@ -2,9 +2,9 @@ import React from "react";
 import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
 
-import Header from "./Header";
-import Title from "./Title";
-import ToDoList from "./ToDoList.jsx";
+import Header from "../components/Header";
+import Title from "../components/Title";
+import ToDoList from "../components/ToDoList.jsx";
 import * as Actions from "../actions/actions"
 
 class ToDoContainer extends React.Component {
@@ -19,7 +19,6 @@ class ToDoContainer extends React.Component {
 
     return (
       <div>
-        <div>Total: {this.state.todos.length}</div>
         <Header title={"To-Do List"} />
         <h3>To-Do</h3>
         <ToDoList 
